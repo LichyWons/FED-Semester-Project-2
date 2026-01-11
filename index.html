@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Auction House</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header class="flex space-x-3 items-center p-4 bg-red-500">
+      <img src="logo.png" alt="Auction House Logo" id="logo" />
+      <button class="border border-grey-500 rounded-xl px-4 py-2">Login</button>
+      <button
+        class="border border-grey-500 rounded-xl px-4 py-2"
+        id="register-btn"
+      >
+        Register
+      </button>
+      <button
+        class="border border-grey-500 rounded-xl px-4 py-2"
+        id="logout-btn"
+      >
+        Logout
+      </button>
+    </header>
+    <main>
+      <h1 class="text-6xl font-bold,">Welcome to The Auction House</h1>
+      <section id="auction-list">
+        <h2 class="text-center text-3xl">Current Auctions</h2>
+        <div class="flex justify-center space-x-8">
+          <div class="auction-item border border-black rounded-xl px-4 py-2">
+            <h3>Antique Vase</h3>
+            <p>Starting Bid: $100</p>
+            <button id="bid-btn">Place Bid</button>
+          </div>
+          <div class="auction-item border border-black rounded-xl px-4 py-2">
+            <h3>Vintage Car</h3>
+            <p>Starting Bid: $5000</p>
+            <button id="bid-btn2">Place Bid</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+  <script src="scripts.js"></script>
+</html>
