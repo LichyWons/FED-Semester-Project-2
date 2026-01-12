@@ -10,7 +10,7 @@
     class="bg-cover bg-center bg-no-repeat min-h-screen"
     style="background-image: url('../img/bgauctionhouse.png')"
   >
-    <header class="bg-transparent>">
+    <header class="bg-transparent">
       <img
         class="max-h-40 mt-10 ml-2.5"
         src="../img/the_auction_house_logo.png"
@@ -19,37 +19,44 @@
       />
     </header>
     <main class="flex flex-col items-center justify-center">
-        <div class="bg-gray-900 p-16 rounded-xl mt-10 flex flex-col items-center  bg-opacity-95 shadow-2xl shadow-indigo-500">
-      <h1 class="text-4xl text-white font-bold mb-6">Log In</h1>
-      <form
-        id="log-in-form"
-        class="flex flex-col space-y-7 w-80"
-        action="#"
-        method="POST"
+      <div
+        class="bg-gray-900 p-16 rounded-xl mt-10 flex flex-col items-center bg-opacity-95"
+        style="box-shadow: 0 0 50px rgba(99, 102, 241, 1);"
       >
-       
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          class="border border-black rounded-xl px-4 py-2"
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          class="border border-black rounded-xl px-4 py-2"
-          required
-        />
-        <button
-          type="submit"
-          class="bg-red-500 text-white rounded-xl px-4 py-2 hover:bg-red-800"
+        <h1 class="text-4xl text-white font-bold mb-6">Log In</h1>
+        <div class="w-full px-4 flex-justify-center">
+        <form
+          id="log-in-form"
+          class="flex flex-col space-y-7 w-full max-w-sm"
+          action="#"
+          method="POST"
         >
-          Log In
-        </button>
-      </form>
-      <p class="text-white mt-10">Don´t have an account yet? Register <a class="text-blue-500" href="../register/">here</a>.</p>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            class="border border-black rounded-xl px-4 py-2"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            class="border border-black rounded-xl px-4 py-2"
+            required
+          />
+          <button
+            type="submit"
+            class="bg-red-500 text-white rounded-xl px-4 py-2 hover:bg-red-800"
+          >
+            Log In
+          </button>
+        </form>
+        <p class="text-white mt-10">
+          Don´t have an account yet? Register
+          <a class="text-blue-500" href="../register/">here</a>.
+        </p>
+      </div>
     </main>
   </body>
   <script src="scripts.js"></script>
