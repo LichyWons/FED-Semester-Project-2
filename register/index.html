@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register - The Auction House</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <script src="index.js" type="module"></script>
+
   </head>
   <body
     class="bg-cover bg-center bg-no-repeat min-h-screen"
@@ -24,7 +26,7 @@
       <h1 class="text-4xl text-white font-bold mb-6">Create Your Account</h1>
       <form
         id="register-form"
-        class="flex flex-col space-y-7 w-full max-w-sm"
+        class="flex flex-col space-y-4 w-full max-w-sm"
         action="#"
         method="POST"
       >
@@ -35,6 +37,7 @@
           class="border border-black rounded-xl px-4 py-2"
           required
         />
+        <p id="form-error"></p>
         <input
           type="email"
           name="email"
@@ -42,6 +45,7 @@
           class="border border-black rounded-xl px-4 py-2"
           required
         />
+        <p id="form-error"></p>
         <input
           type="password"
           name="password"
@@ -49,6 +53,7 @@
           class="border border-black rounded-xl px-4 py-2"
           required
         />
+        <p id="form-error"></p>
         <button
           type="submit"
           class="bg-red-500 text-white rounded-xl px-4 py-2 hover:bg-red-800"
