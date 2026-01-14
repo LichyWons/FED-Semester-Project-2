@@ -37,7 +37,7 @@
           class="border border-black rounded-xl px-4 py-2"
           required
         />
-        <p id="form-error"></p>
+        <p id="form-error-user" class="text-red-600"></p>
         <input
           type="email"
           name="email"
@@ -45,7 +45,7 @@
           class="border border-black rounded-xl px-4 py-2"
           required
         />
-        <p id="form-error"></p>
+        <p id="form-error-mail" class="text-red-600"></p>
         <input
           type="password"
           name="password"
@@ -53,7 +53,14 @@
           class="border border-black rounded-xl px-4 py-2"
           required
         />
-        <p id="form-error"></p>
+         <input
+          type="password"
+          name="confirm-password"
+          placeholder="Confirm Password"
+          class="border border-black rounded-xl px-4 py-2"
+          required
+        />
+        <p id="form-error-password" class="text-red-600"></p>
         <button
           type="submit"
           class="bg-red-500 text-white rounded-xl px-4 py-2 hover:bg-red-800"
