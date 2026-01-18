@@ -19,3 +19,21 @@ export async function registerUser({ name, email, password }) {
 
   return json;
 }
+
+export async function loginUser({ email, password }) {
+  const response = await fetch(BASE_URL + '/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password }),
+  });
+
+  const json = await response.json();
+
+  if (!response.ok) {
+    const message =
+      json?.errors?.[0]?.message || json?.message || 'Login failed';
+    throw new Error(message);
+  }
+
+  return json;
+}

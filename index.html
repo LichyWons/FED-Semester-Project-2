@@ -6,41 +6,112 @@
     <title>The Auction House</title>
     <link rel="stylesheet" href="./css/style.css" />
   </head>
-  <body>
-    <header class="flex space-x-3 items-center p-4 bg-red-500">
-      <img src="logo.png" alt="Auction House Logo" id="logo" />
-      <button class="border border-grey-500 rounded-xl px-4 py-2">Login</button>
-      <button
-        class="border border-grey-500 rounded-xl px-4 py-2"
-        id="register-btn"
-      >
-        Register
-      </button>
-      <button
-        class="border border-grey-500 rounded-xl px-4 py-2"
-        id="logout-btn"
-      >
-        Logout
-      </button>
+  <body class="bg-gray-900 text-gray-300">
+    <header
+      class="flex items-center space-x-3 p-4 sticky top-0 w-full z-50 bg-gray-900 border-b border-[var(--brand)]"
+    >
+      <div class="flex items-center flex-grow space-x-4">
+        <img
+          class="max-h-20 mt-5"
+          src="img/the_auction_house_logo.png"
+          alt="Auction House Logo"
+          id="logo"
+        />
+      </div>
+
+      <div id="nav-guest" class="">
+        <div class="ml-auto flex space-x-6">
+          <a href="./login/">
+            <button
+              class="border border-[var(--brand)] rounded-xl px-4 py-2 hover:bg-[var(--brand)] transition-colors duration-300"
+            >
+              Login
+            </button>
+          </a>
+          <button
+            class="bg-[var(--brand)] border border-grey-500 rounded-xl px-4 py-2 hover:bg-[var(--brand-hover)] transition-colors duration-300"
+            id="register-btn"
+          >
+            Register
+          </button>
+        </div>
+      </div>
+      <div id="nav-user" class="hidden ml-auto items-center space-x-6">
+        <span id="nav-credits"></span>
+        <img id="nav-avatar" />
+        <a
+          aria-current="page"
+          class="border-b-2 border-[var(--brand)] text-[var(--brand)] cursor-default"
+          >Listings</a
+        >
+        <a
+          href="/profile/"
+          class="hover:text-[var(--brand)] transition-colors duration-300"
+          >Profile</a
+        >
+        <a
+          href="/create-listing/"
+          class="hover:text-[var(--brand)] transition-colors duration-300"
+        >
+          Create listing</a
+        >
+        <button
+          class="bg-red-500 border border-grey-500 rounded-xl px-4 py-2 hover:bg-red-800 transition-colors duration-300"
+          id="logout-btn"
+        >
+          Logout
+        </button>
+      </div>
     </header>
     <main>
-      <h1 class="text-6xl font-bold,">Welcome to The Auction House</h1>
+      <div
+        id="hero-listings"
+        class="bg-cover bg-center bg-no-repeat h-60"
+        style="background-image: url('../img/bgauctionhouse.png')"
+      >
+        <p class="text-4xl p-20 tracking-wide">Sale made easy</p>
+      </div>
+
+      <h1 class="mt-10 text-5xl tracking-wide text-center">Current auctions</h1>
+      <div class="flex items-center justify-between px-10 py-6">
+        <input
+          class="w-full max-w-md rounded-xl bg-gray-800 border border-gray-700 px-4 py-2 text-gray-100 placeholder:text-gray-500 focus:outline-none focus:border-[var(--brand)]"
+          type="search"
+          placeholder="Search"
+        />
+        <span id="number-of-auctions" class="ml-6 text-gray-400">0</span>
+      </div>
+
       <section id="auction-list">
-        <h2 class="text-center text-3xl">Current Auctions</h2>
-        <div class="flex justify-center space-x-8">
-          <div class="auction-item border border-black rounded-xl px-4 py-2">
-            <h3>Antique Vase</h3>
-            <p>Starting Bid: $100</p>
-            <button id="bid-btn">Place Bid</button>
-          </div>
-          <div class="auction-item border border-black rounded-xl px-4 py-2">
-            <h3>Vintage Car</h3>
-            <p>Starting Bid: $5000</p>
-            <button id="bid-btn2">Place Bid</button>
+        <div class="mt-10 flex justify-center space-x-8">
+          <div
+            class="auction-item bg-gray-300 text-black border border-black rounded-xl px-4 py-2 flex items-center flex-col"
+          >
+            <div id="item-picture" class="size-48 mb-4">
+              <img src="img/Renault-5-Turbo-Maxi-158224.jpg" />
+            </div>
+            <h3 class="text-xl">Renault 5 Turbo Maxi</h3>
+            <p>Actual bid:</p>
+            <p id="starting-bid">$100</p>
+            <button
+              id="bid-btn"
+              class="bg-[var(--brand)] border border-grey-500 rounded-xl px-4 py-2 hover:bg-[var(--brand-hover)] transition-colors duration-300 text-gray-300"
+            >
+              Place Bid
+            </button>
           </div>
         </div>
       </section>
     </main>
+    <footer>
+      <div
+        class="bg-black text-gray-300 p-4 mt-10 border-t border-[var(--brand)]"
+      >
+        <p class="text-center">
+          &copy; 2026 Krzysztof Bytniewski. All rights reserved.
+        </p>
+      </div>
+    </footer>
   </body>
-  <script src="scripts.js"></script>
+  <script type="module" src="js/index.js"></script>
 </html>
