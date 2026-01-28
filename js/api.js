@@ -37,3 +37,16 @@ export async function loginUser({ email, password }) {
 
   return json;
 }
+
+export async function getListings() {
+  const response = await fetch(`${BASE_URL}/auction/listings?_bids=true`);
+  const json = await response.json();
+
+  if (!response.ok) {
+    const message =
+      json?.errors?.[0]?.message || json?.message || 'Could not fetch listings';
+    throw new Error(message);
+  }
+
+  return json;
+}
