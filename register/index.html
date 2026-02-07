@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,7 +6,6 @@
     <title>Register - The Auction House</title>
     <link rel="stylesheet" href="../css/style.css" />
     <script src="index.js" type="module"></script>
-
   </head>
   <body
     class="bg-cover bg-center bg-no-repeat min-h-screen"
@@ -21,54 +20,60 @@
       />
     </header>
     <main class="flex flex-col items-center justify-center">
-        <div class="bg-gray-900 p-16 rounded-xl mt-10 flex flex-col items-center bg-opacity-95"
-        style="box-shadow: 0 0 50px rgba(99, 102, 241, 1);">
-      <h1 class="text-4xl text-white font-bold mb-6">Create Your Account</h1>
-      <form
-        id="register-form"
-        class="flex flex-col space-y-4 w-full max-w-sm"
-        action="#"
-        method="POST"
+      <div
+        class="bg-gray-900 p-16 rounded-xl mt-10 flex flex-col items-center bg-opacity-95"
+        style="box-shadow: 0 0 50px rgba(99, 102, 241, 1)"
       >
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          class="border border-black rounded-xl px-4 py-2"
-          required
-        />
-        <p id="form-error-user" class="text-red-600"></p>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          class="border border-black rounded-xl px-4 py-2"
-          required
-        />
-        <p id="form-error-mail" class="text-red-600"></p>
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          class="border border-black rounded-xl px-4 py-2"
-          required
-        />
-         <input
-          type="password"
-          name="confirm-password"
-          placeholder="Confirm Password"
-          class="border border-black rounded-xl px-4 py-2"
-          required
-        />
-        <p id="form-error-password" class="text-red-600"></p>
-        <button
-          type="submit"
-          class="bg-red-500 text-white rounded-xl px-4 py-2 hover:bg-red-800"
+        <h1 class="text-4xl text-white font-bold mb-6">Create Your Account</h1>
+        <form
+          id="register-form"
+          class="flex flex-col space-y-4 w-full max-w-sm"
+          action="#"
+          method="POST"
         >
-          Register
-        </button>
-      </form>
-      <p class="text-white mt-10">Already have an account? Login <a class="text-blue-500" href="../login">here</a>.</p>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            class="border border-black rounded-xl px-4 py-2"
+            required
+          />
+          <p id="form-error-user" class="text-red-600"></p>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            class="border border-black rounded-xl px-4 py-2"
+            required
+          />
+          <p id="form-error-mail" class="text-red-600"></p>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            class="border border-black rounded-xl px-4 py-2"
+            required
+          />
+          <input
+            type="password"
+            name="confirm-password"
+            placeholder="Confirm Password"
+            class="border border-black rounded-xl px-4 py-2"
+            required
+          />
+          <p id="form-error-password" class="text-red-600"></p>
+          <button
+            type="submit"
+            class="bg-red-500 text-white rounded-xl px-4 py-2 hover:bg-red-800"
+          >
+            Register
+          </button>
+        </form>
+        <p class="text-white mt-10">
+          Already have an account? Login
+          <a class="text-blue-500" href="../login">here</a>.
+        </p>
+      </div>
     </main>
   </body>
   <script src="scripts.js"></script>

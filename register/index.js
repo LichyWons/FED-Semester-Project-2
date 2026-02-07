@@ -28,7 +28,6 @@ form.addEventListener('submit', async (event) => {
 
   try {
     const result = await registerUser({ name: username, email, password });
-    console.log(result);
   } catch (err) {
     passwordErrorMessage.textContent = err.message;
   }

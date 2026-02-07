@@ -9,7 +9,6 @@ export function toggleNavByAuth() {
     navGuest?.classList.add('hidden');
     navUser?.classList.remove('hidden');
 
-    // 🔽 RENDER NAV USER (LOCAL)
     try {
       const user = JSON.parse(userRaw);
 
@@ -57,7 +56,7 @@ export function initLogout() {
 
   logoutBtn.addEventListener('click', () => {
     localStorage.removeItem('user');
-    localStorage.removeItem('token'); // opcjonalnie
+    localStorage.removeItem('token');
 
     toggleNavByAuth();
     window.location.href = './index.html';

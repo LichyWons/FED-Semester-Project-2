@@ -1,4 +1,3 @@
-// singleListing/index.js
 import { getListingById } from '../js/api.js';
 import { toggleNavByAuth, initLogout } from '../js/authNav.js';
 
@@ -7,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initLogout();
 });
 
-// --- DOM ---
 const titleEl = document.getElementById('listing-title');
 const descEl = document.getElementById('listing-description');
 const imgEl = document.getElementById('listing-image');
@@ -25,7 +23,6 @@ const bidSuccessEl = document.getElementById('bid-success');
 const bidsStatusEl = document.getElementById('bids-status');
 const bidsListEl = document.getElementById('bids-list');
 
-// --- helpers ---
 const token = localStorage.getItem('token');
 const isLoggedIn = Boolean(token);
 
@@ -128,7 +125,6 @@ function renderListing(listing) {
   if (endsEl)
     endsEl.textContent = listing.endsAt ? formatDate(listing.endsAt) : '—';
 
-  // bids number: use actual list length (as you requested)
   if (bidsCountEl) bidsCountEl.textContent = String(bids.length);
 
   if (currentBidEl) {
@@ -140,12 +136,9 @@ function renderListing(listing) {
   renderBidsStatus(bids);
   renderBidsList(bids);
 
-  // store for bid validation
   return { bids, currentBid };
 }
 
-// --- API call for placing bid ---
-// If your api.js already has a placeBid function, replace this with an import.
 async function placeBid(listingId, amount) {
   if (!token) throw new Error('You must be logged in to bid.');
 
@@ -173,7 +166,6 @@ async function placeBid(listingId, amount) {
   return json;
 }
 
-// --- main ---
 async function main() {
   applyAuthUI();
 
@@ -187,7 +179,6 @@ async function main() {
     const { data: listing } = await getListingById(id);
     let { currentBid } = renderListing(listing);
 
-    // Place bid (only if logged in + form exists)
     if (isLoggedIn && bidFormEl) {
       bidFormEl.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -200,13 +191,11 @@ async function main() {
           return;
         }
 
-        // Optional: enforce higher than current bid
         if (amount <= currentBid) {
           setBidMessages({ error: `Bid must be higher than ${currentBid}.` });
           return;
         }
 
-        // Optional: prevent bidding after end
         const endsAt = new Date(listing.endsAt).getTime();
         if (Date.now() > endsAt) {
           setBidMessages({ error: 'Auction has ended.' });
@@ -218,7 +207,6 @@ async function main() {
           setBidMessages({ success: 'Bid placed!' });
           if (bidAmountEl) bidAmountEl.value = '';
 
-          // Re-fetch listing to refresh bids/current bid
           const refreshed = await getListingById(id);
           const state = renderListing(refreshed.data);
           currentBid = state.currentBid;

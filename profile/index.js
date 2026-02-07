@@ -7,7 +7,6 @@ import {
 
 const API_BASE = 'https://v2.api.noroff.dev';
 
-// ---- Auth / user (always read fresh from storage) ----
 function getStoredUser() {
   const raw = localStorage.getItem('user');
   return raw ? JSON.parse(raw) : null;
@@ -38,13 +37,11 @@ function authHeaders() {
     Authorization: `Bearer ${token}`,
   };
 
-  // Auction endpoints require this
   if (apiKey) headers['X-Noroff-API-Key'] = apiKey;
 
   return headers;
 }
 
-// ---- DOM ----
 const nameEl = document.querySelector('#profileName');
 const creditsEl = document.querySelector('#profileCredits');
 const emailEl = document.querySelector('#profileEmail');
@@ -59,7 +56,6 @@ const avatarSuccessEl = document.querySelector('#avatar-success');
 const myListingsEl = document.querySelector('#myListings');
 const myListingsStatusEl = document.querySelector('#myListingsStatus');
 
-// ---- API ----
 async function fetchProfile() {
   const profileName = getProfileName();
   const url = `${API_BASE}/auction/profiles/${encodeURIComponent(
@@ -100,7 +96,6 @@ async function updateAvatar(avatarUrl) {
   return json.data;
 }
 
-// ---- Render ----
 function renderProfile(profile) {
   if (nameEl) nameEl.textContent = profile?.name ?? '—';
   if (creditsEl) creditsEl.textContent = profile?.credits ?? 0;
@@ -181,7 +176,6 @@ function renderMyListings(listings) {
   });
 }
 
-// ---- Utils ----
 function clearAvatarMessages() {
   if (avatarErrorEl) avatarErrorEl.textContent = '';
   if (avatarSuccessEl) avatarSuccessEl.textContent = '';
@@ -196,16 +190,12 @@ function isValidUrl(value) {
   }
 }
 
-// ---- Init ----
 async function init() {
-  // 1) nav fast render from storage + logout
   toggleNavByAuth();
   initLogout();
 
-  // 2) block view if not authenticated (token + apiKey + name)
   if (!requireAuth()) return;
 
-  // 3) load profile and render page + nav (fresh data)
   try {
     if (myListingsStatusEl) myListingsStatusEl.textContent = 'Loading...';
 
@@ -214,10 +204,9 @@ async function init() {
     renderProfile(profile);
     renderMyListings(profile.listings || []);
 
-    // keep nav in sync
     updateUserInStorage(profile);
-    toggleNavByAuth(); // re-render nav from updated storage
-    renderNavUser(profile); // optional: if you want nav to reflect immediately even if toggleNav doesn't render credits
+    toggleNavByAuth();
+    renderNavUser(profile);
   } catch (err) {
     console.error(err);
 
@@ -232,7 +221,6 @@ async function init() {
 
 document.addEventListener('DOMContentLoaded', init);
 
-// ---- Avatar form handler ----
 if (avatarFormEl) {
   avatarFormEl.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -250,12 +238,10 @@ if (avatarFormEl) {
 
       await updateAvatar(value);
 
-      // refresh profile (source of truth)
       const profile = await fetchProfile();
 
       renderProfile(profile);
 
-      // sync nav
       updateUserInStorage(profile);
       toggleNavByAuth();
       renderNavUser(profile);

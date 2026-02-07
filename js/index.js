@@ -1,28 +1,21 @@
-console.log('Index.js loaded');
-
 import { toggleNavByAuth, initLogout } from './authNav.js';
 import { getListings } from './api.js';
 
-// DOM
 const listEl = document.getElementById('auction-list');
 const searchInput = document.getElementById('search-input');
 
-// State
 let allListings = [];
 
-// Init
 document.addEventListener('DOMContentLoaded', () => {
   toggleNavByAuth();
   initLogout();
   main();
 });
 
-// Main loader
 async function main() {
   try {
     const result = await getListings();
 
-    // zapamiętujemy oryginalne listingi (24)
     allListings = result.data || [];
 
     renderListings(allListings);
@@ -34,7 +27,6 @@ async function main() {
   }
 }
 
-// Render list
 function renderListings(listings) {
   listEl.innerHTML = '';
 
@@ -52,7 +44,6 @@ function renderListings(listings) {
   listEl.appendChild(fragment);
 }
 
-// Auctions count
 function renderAuctionsCount(count) {
   const el = document.querySelector('#number-of-auctions');
   if (!el) return;
@@ -60,7 +51,6 @@ function renderAuctionsCount(count) {
   el.textContent = `Showing ${count} auctions`;
 }
 
-// Search (client-side)
 function filterListings(query) {
   const q = query.toLowerCase().trim();
 
@@ -80,13 +70,11 @@ if (searchInput) {
   });
 }
 
-// Utils
 function formatEndsAt(iso) {
   const d = new Date(iso);
   return d.toLocaleString();
 }
 
-// Card factory
 function createListingCard(listing) {
   const { id, title, description, media, endsAt, _count } = listing;
 

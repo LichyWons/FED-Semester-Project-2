@@ -24,7 +24,6 @@ form.addEventListener('submit', async (e) => {
       }),
     );
 
-    // apiKey
     let apiKey = localStorage.getItem('apiKey');
     if (!apiKey) {
       const apiKeyRes = await createApiKey(
@@ -35,17 +34,7 @@ form.addEventListener('submit', async (e) => {
       localStorage.setItem('apiKey', apiKey);
     }
 
-    // DEBUG (usuń potem)
-    console.log('redirecting...', {
-      token: !!localStorage.getItem('token'),
-      user: !!localStorage.getItem('user'),
-      apiKey: !!localStorage.getItem('apiKey'),
-    });
-
-    // Redirect
-    console.log('BEFORE REDIRECT');
-
-    window.location.assign('../index.html'); // albo "/" zależnie od hostingu
+    window.location.assign('../index.html');
   } catch (err) {
     console.error(err);
     if (errorEl) errorEl.textContent = err.message || 'Login failed';

@@ -89,3 +89,28 @@ export async function createApiKey(accessToken, name = 'Auction Website') {
 
   return json; // json.data.key
 }
+
+export async function createListing(data) {
+  const token = localStorage.getItem('token');
+  const apiKey = localStorage.getItem('apiKey');
+
+  const response = await fetch('https://v2.api.noroff.dev/auction/listings', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+      'X-Noroff-API-Key': apiKey,
+    },
+    body: JSON.stringify(data),
+  });
+
+  const json = await response.json();
+
+  if (!response.ok) {
+    const message =
+      json?.errors?.[0]?.message || json?.message || 'Create listing failed';
+    throw new Error(message);
+  }
+
+  return json;
+}
