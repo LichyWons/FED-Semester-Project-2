@@ -28,17 +28,20 @@
               Login
             </button>
           </a>
-          <button
-            class="bg-[var(--brand)] border border-grey-500 rounded-xl px-4 py-2 hover:bg-[var(--brand-hover)] transition-colors duration-300"
-            id="register-btn"
-          >
-            Register
-          </button>
+          <a href="./register/">
+            <button
+              class="bg-[var(--brand)] border border-grey-500 rounded-xl px-4 py-2 hover:bg-[var(--brand-hover)] transition-colors duration-300"
+              id="register-btn"
+            >
+              Register
+            </button>
+          </a>
         </div>
       </div>
-      <div id="nav-user" class="hidden ml-auto items-center space-x-6">
-        <span id="nav-credits"></span>
+      <div id="nav-user" class="flex hidden ml-auto items-center space-x-6">
         <img id="nav-avatar" />
+        <span id="nav-credits"></span>
+
         <a
           aria-current="page"
           class="border-b-2 border-[var(--brand)] text-[var(--brand)] cursor-default"
@@ -75,6 +78,7 @@
       <h1 class="mt-10 text-5xl tracking-wide text-center">Current auctions</h1>
       <div class="flex items-center justify-between px-10 py-6">
         <input
+          id="search-input"
           class="w-full max-w-md rounded-xl bg-gray-800 border border-gray-700 px-4 py-2 text-gray-100 placeholder:text-gray-500 focus:outline-none focus:border-[var(--brand)]"
           type="search"
           placeholder="Search"
@@ -115,6 +119,7 @@
         </p>
       </div>
     </footer>
+    auctions
   </body>
   <script type="module" src="js/index.js"></script>
 </html>

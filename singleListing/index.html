@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Auction House</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body class="bg-gray-900 text-gray-300">
+    <header
+      class="flex items-center space-x-3 p-4 sticky top-0 w-full z-50 bg-gray-900 border-b border-[var(--brand)]"
+    >
+      <div class="flex items-center flex-grow space-x-4">
+        <img
+          class="max-h-20 mt-5"
+          src="../img/the_auction_house_logo.png"
+          alt="Auction House Logo"
+          id="logo"
+        />
+      </div>
+      <div id="nav-guest" class="">
+        <div class="ml-auto flex space-x-6">
+          <a href="../login/">
+            <button
+              class="border border-[var(--brand)] rounded-xl px-4 py-2 hover:bg-[var(--brand)] transition-colors duration-300"
+            >
+              Login
+            </button>
+          </a>
+          <a href="../register/"
+            ><button
+              class="bg-[var(--brand)] border border-grey-500 rounded-xl px-4 py-2 hover:bg-[var(--brand-hover)] transition-colors duration-300"
+              id="register-btn"
+            >
+              Register
+            </button>
+          </a>
+        </div>
+      </div>
+      <div id="nav-user" class="ml-auto items-center space-x-6">
+        <span id="nav-credits"></span>
+        <img id="nav-avatar" />
+        <a
+          aria-current="page"
+          class="border-b-2 border-[var(--brand)] text-[var(--brand)] cursor-default"
+          >Listings</a
+        >
+        <a
+          href="/profile/"
+          class="hover:text-[var(--brand)] transition-colors duration-300"
+          >Profile</a
+        >
+        <a
+          href="/create-listing/"
+          class="hover:text-[var(--brand)] transition-colors duration-300"
+        >
+          Create listing</a
+        >
+        <button
+          class="bg-red-500 border border-grey-500 rounded-xl px-4 py-2 hover:bg-red-800 transition-colors duration-300"
+          id="logout-btn"
+        >
+          Logout
+        </button>
+      </div>
+    </header>
+    <main class="max-w-5xl mx-auto px-4 py-8">
+      <div class="mb-6">
+        <a
+          href="../index.html"
+          class="inline-flex items-center gap-2 text-sm font-medium hover:underline"
+        >
+          ← All listings
+        </a>
+      </div>
+
+      <div class="mb-6">
+        <h1 id="listing-title" class="text-3xl font-semibold leading-tight">
+          Loading...
+        </h1>
+
+        <div
+          class="mt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-neutral-400"
+        >
+          <div>
+            Ends:
+            <span id="listing-endsAt" class="font-medium text-neutral-200"
+              >—</span
+            >
+          </div>
+
+          <div>
+            Bids:
+            <span id="listing-bidsCount" class="font-medium text-neutral-200"
+              >—</span
+            >
+          </div>
+
+          <div>
+            Current bid:
+            <span id="listing-currentBid" class="font-medium text-neutral-200"
+              >—</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <section class="grid gap-8 lg:grid-cols-5">
+        <div class="lg:col-span-3">
+          <div
+            class="rounded-2xl border border-neutral-200 overflow-hidden bg-neutral-100"
+          >
+            <img
+              id="listing-image"
+              src=""
+              alt=""
+              class="w-full aspect-[4/3] object-cover"
+            />
+          </div>
+
+          <div class="mt-4 rounded-2xl border border-neutral-200 p-4">
+            <h2
+              class="text-sm font-semibold tracking-wide uppercase text-neutral-400"
+            >
+              Description
+            </h2>
+            <p
+              id="listing-description"
+              class="mt-2 text-neutral-200 leading-relaxed"
+            >
+              —
+            </p>
+          </div>
+        </div>
+
+        <aside class="lg:col-span-2 flex flex-col gap-4">
+          <div class="rounded-2xl border border-neutral-200 p-4">
+            <h2
+              class="text-sm font-semibold tracking-wide uppercase text-neutral-400"
+            >
+              Place a bid
+            </h2>
+
+            <div id="bid-locked" class="mt-3 hidden">
+              <p class="text-sm text-neutral-300 m-2">
+                You need to be logged in to place a bid.
+              </p>
+              <a href="../login/"
+                ><button
+                  class="bg-[var(--brand)] border border-grey-500 rounded-xl px-4 py-2 hover:bg-[var(--brand-hover)] transition-colors duration-300"
+                >
+                  Log in to bid
+                </button>
+              </a>
+            </div>
+
+            <form id="bid-form" class="mt-3 flex flex-col gap-3">
+              <label class="text-sm text-neutral-200" for="bid-amount">
+                Your bid (credits)
+              </label>
+
+              <input
+                id="bid-amount"
+                name="amount"
+                type="number"
+                min="1"
+                step="1"
+                class="text-neutral-900 border border-neutral-300 rounded-xl px-4 py-2"
+                placeholder="e.g. 250"
+                required
+              />
+
+              <button
+                type="submit"
+                class="rounded-xl px-4 py-2 border bg-[var(--brand)] hover:bg-[var(--brand-hover)] transition text-neutral-200 border-neutral-900"
+              >
+                Place bid
+              </button>
+
+              <p id="bid-error" class="text-sm text-red-600"></p>
+              <p id="bid-success" class="text-sm text-emerald-700"></p>
+            </form>
+          </div>
+
+          <div class="rounded-2xl border border-neutral-200 p-4">
+            <div class="flex items-center justify-between">
+              <h2
+                class="text-sm font-semibold tracking-wide uppercase text-neutral-400"
+              >
+                Bids
+              </h2>
+              <span id="bids-status" class="text-xs text-neutral-400">—</span>
+            </div>
+
+            <ul id="bids-list" class="mt-3 flex flex-col gap-2"></ul>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <div
+        class="bg-black text-gray-300 p-4 mt-10 border-t border-[var(--brand)]"
+      >
+        <p class="text-center">
+          &copy; 2026 Krzysztof Bytniewski. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+  <script type="module" src="./index.js"></script>
+</html>

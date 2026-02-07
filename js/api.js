@@ -39,7 +39,7 @@ export async function loginUser({ email, password }) {
 }
 
 export async function getListings() {
-  const response = await fetch(`${BASE_URL}/auction/listings?_bids=true`);
+  const response = await fetch(`${BASE_URL}/auction/listings?_active=true`);
   const json = await response.json();
 
   if (!response.ok) {
@@ -48,5 +48,44 @@ export async function getListings() {
     throw new Error(message);
   }
 
+  const listings = (json.data || []).sort(
+    (a, b) => new Date(a.endsAt).getTime() - new Date(b.endsAt).getTime(),
+  );
+
+  return { ...json, data: listings };
+}
+
+export async function getListingById(id) {
+  const response = await fetch(
+    `${BASE_URL}/auction/listings/${encodeURIComponent(id)}?_bids=true&_seller=true`,
+  );
+
+  const json = await response.json();
+
+  if (!response.ok) {
+    const message =
+      json?.errors?.[0]?.message || json?.message || 'Could not fetch listing';
+    throw new Error(message);
+  }
+
   return json;
+}
+export async function createApiKey(accessToken, name = 'Auction Website') {
+  const response = await fetch(`${BASE_URL}/auth/create-api-key`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({ name }),
+  });
+
+  const json = await response.json();
+  if (!response.ok) {
+    const message =
+      json?.errors?.[0]?.message || json?.message || 'Could not create API key';
+    throw new Error(message);
+  }
+
+  return json; // json.data.key
 }

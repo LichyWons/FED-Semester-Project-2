@@ -1,48 +1,92 @@
 console.log('Index.js loaded');
-import { toggleNavByAuth, initLogout } from './authNav.js';
 
+import { toggleNavByAuth, initLogout } from './authNav.js';
+import { getListings } from './api.js';
+
+// DOM
+const listEl = document.getElementById('auction-list');
+const searchInput = document.getElementById('search-input');
+
+// State
+let allListings = [];
+
+// Init
 document.addEventListener('DOMContentLoaded', () => {
   toggleNavByAuth();
   initLogout();
+  main();
 });
 
-import { getListings } from './api.js';
-
-const listEl = document.getElementById('auction-list');
-
+// Main loader
 async function main() {
   try {
     const result = await getListings();
-    console.log('APIresult§', result);
 
-    const first = result.data[0];
-    console.log('First listing:', first);
-    console.log('has bids?', first.bids);
-    console.log('media field?', first.media);
-    console.log(Object.keys(first));
-    console.log('media:', first.media);
-    console.log('endsAt:', first.endsAt);
+    // zapamiętujemy oryginalne listingi (24)
+    allListings = result.data || [];
 
-    const listings = result.data;
-
-    listEl.innerHTML = '';
-
-    for (const listing of listings) {
-      listEl.appendChild(createListingCard(listing));
-    }
+    renderListings(allListings);
+    renderAuctionsCount(allListings.length);
   } catch (err) {
     console.error('Error fetching listings:', err);
-    listEl.textContent = err.message;
+    listEl.innerHTML = err.message;
+    renderAuctionsCount(0);
   }
 }
 
-main();
+// Render list
+function renderListings(listings) {
+  listEl.innerHTML = '';
 
+  if (!listings || listings.length === 0) {
+    listEl.textContent = 'No listings found.';
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  for (const listing of listings) {
+    fragment.appendChild(createListingCard(listing));
+  }
+
+  listEl.appendChild(fragment);
+}
+
+// Auctions count
+function renderAuctionsCount(count) {
+  const el = document.querySelector('#number-of-auctions');
+  if (!el) return;
+
+  el.textContent = `Showing ${count} auctions`;
+}
+
+// Search (client-side)
+function filterListings(query) {
+  const q = query.toLowerCase().trim();
+
+  const filtered = allListings.filter((listing) => {
+    const title = listing.title?.toLowerCase() || '';
+    const desc = listing.description?.toLowerCase() || '';
+    return title.includes(q) || desc.includes(q);
+  });
+
+  renderListings(filtered);
+  renderAuctionsCount(filtered.length);
+}
+
+if (searchInput) {
+  searchInput.addEventListener('input', (e) => {
+    filterListings(e.target.value);
+  });
+}
+
+// Utils
 function formatEndsAt(iso) {
   const d = new Date(iso);
   return d.toLocaleString();
 }
 
+// Card factory
 function createListingCard(listing) {
   const { id, title, description, media, endsAt, _count } = listing;
 
@@ -94,9 +138,9 @@ function createListingCard(listing) {
 
   const a = document.createElement('a');
   a.className =
-    'bg-[var(--brand)] hover:bg-[var(--brand-hover)] transition mt-3 inline-flex items-center justify-center rounded-xl px-4 py-2 border border-neutral-900 ';
+    'bg-[var(--brand)] hover:bg-[var(--brand-hover)] transition mt-3 inline-flex items-center justify-center rounded-xl px-4 py-2 border border-neutral-900';
   a.textContent = 'View details';
-  a.href = `./listing/index.html?id=${encodeURIComponent(id)}`;
+  a.href = `./singleListing/index.html?id=${encodeURIComponent(id)}`;
 
   meta.appendChild(ends);
   meta.appendChild(bids);

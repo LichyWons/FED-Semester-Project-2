@@ -1,25 +1,53 @@
-import { loginUser } from '../js/api.js';
-const form = document.getElementById('login-form');
-const loginErrorMessage = document.getElementById('form-error-login');
+import { loginUser, createApiKey } from '../js/api.js';
 
-form.addEventListener('submit', async (event) => {
-  loginErrorMessage.textContent = '';
-  event.preventDefault();
-  loginErrorMessage.textContent = '';
-  const email = form.elements['email'].value;
-  const password = form.elements['password'].value;
+const form = document.querySelector('#login-form');
+const errorEl = document.querySelector('#login-error');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (errorEl) errorEl.textContent = '';
 
   try {
+    const email = form.email.value.trim();
+    const password = form.password.value;
+
     const result = await loginUser({ email, password });
-    const token = result.accessToken;
-    localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(result.data));
-    window.location.href = '../index.html';
-    console.log(result);
-    console.log(result.data.accessToken);
-    console.log('token?', result.data.accessToken);
-    console.log('user?', requestIdleCallback.data);
+
+    localStorage.setItem('token', result.data.accessToken);
+    localStorage.setItem(
+      'user',
+      JSON.stringify({
+        name: result.data.name,
+        email: result.data.email,
+        avatar: result.data.avatar,
+        banner: result.data.banner,
+      }),
+    );
+
+    // apiKey
+    let apiKey = localStorage.getItem('apiKey');
+    if (!apiKey) {
+      const apiKeyRes = await createApiKey(
+        result.data.accessToken,
+        'Auction Website',
+      );
+      apiKey = apiKeyRes.data.key;
+      localStorage.setItem('apiKey', apiKey);
+    }
+
+    // DEBUG (usuń potem)
+    console.log('redirecting...', {
+      token: !!localStorage.getItem('token'),
+      user: !!localStorage.getItem('user'),
+      apiKey: !!localStorage.getItem('apiKey'),
+    });
+
+    // Redirect
+    console.log('BEFORE REDIRECT');
+
+    window.location.assign('../index.html'); // albo "/" zależnie od hostingu
   } catch (err) {
-    loginErrorMessage.textContent = err.message;
+    console.error(err);
+    if (errorEl) errorEl.textContent = err.message || 'Login failed';
   }
 });
