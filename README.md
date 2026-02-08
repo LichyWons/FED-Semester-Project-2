@@ -109,24 +109,25 @@ If using Tailwind CLI:
 
 ```bash
 npx tailwindcss -i ./css/input.css -o ./css/style.css --watch
+```
 
 🌍 API
 Noroff Auction API v2
 
-Documentation: https://v2.api.noroff.dev/docs
+Documentation: (https://v2.api.noroff.dev/docs)
 
-🔗 Required Links (for submission)
-📊 Gantt chart: (add link)
+🔗 Required Links:
+📊 Gantt chart: ([GitHubProjects](https://github.com/users/LichyWons/projects/4/views/2))
 
-🎨 Design prototype (Figma): (add link)
+🎨 Design prototype: ([Figma](https://www.figma.com/design/BsP2aNYwCITBya2UaXgTuf/AuctionHouseDesktop?node-id=0-1&t=J9kIiGQtvOSMTOp0-1))
 
-🎨 Style guide: (add link)
+🎨 Style guide: ([Figma](https://www.figma.com/design/BsP2aNYwCITBya2UaXgTuf/AuctionHouseDesktop?node-id=31-3&t=HmfrYfKdCQhHhWvY-1))
 
-🗂 Kanban board (GitHub Projects): (add link)
+🗂 Kanban board: ([GitHubProjects](https://github.com/users/LichyWons/projects/4))
 
-💻 Repository: (add link)
+💻 Repository: ([GitHubRepository](https://github.com/LichyWons/FED-Semester-Project-2))
 
-🌐 Live demo: (add link)
+🌐 Live demo: ([TheAuctionHouse](https://onlineauctionhouse.netlify.app/index.html) )
 
 ⚠️ Notes
 This project is frontend-only; all data is handled via the Noroff API
@@ -139,4 +140,7 @@ Authentication state is managed via localStorage
 Krzysztof Bytniewski
 Frontend Development – Noroff School of Technology and Digital Media
 2026
+
+```
+
 ```
