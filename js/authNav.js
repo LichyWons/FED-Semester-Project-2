@@ -13,12 +13,10 @@ export function toggleNavByAuth() {
   if (isLoggedIn) {
     navGuest?.classList.add('hidden');
 
-    // user nav: ukryty na mobile, widoczny od md
     navUser?.classList.add('hidden');
     navUser?.classList.remove('md:hidden');
     navUser?.classList.add('md:flex');
 
-    // hamburger: widoczny tylko dla usera (na mobile)
     navToggle?.classList.remove('hidden');
 
     try {
@@ -59,12 +57,10 @@ export function toggleNavByAuth() {
   } else {
     navGuest?.classList.remove('hidden');
 
-    // ważne: usuń md:flex, dodaj md:hidden
     navUser?.classList.add('hidden');
     navUser?.classList.remove('md:flex');
     navUser?.classList.add('md:hidden');
 
-    // gość: hamburger ukryty
     navToggle?.classList.add('hidden');
   }
 }
@@ -121,12 +117,10 @@ export function updateUserInStorage(profile) {
   localStorage.setItem('user', JSON.stringify(updatedUser));
 }
 export function initMobileNav() {
-  console.trace('Initializing mobile nav fired');
   const navToggle = document.getElementById('nav-toggle');
   const navMobile = document.getElementById('nav-mobile');
   if (!navToggle || !navMobile) return;
 
-  // tylko zalogowany ma mieć to menu
   const isLoggedIn = Boolean(
     localStorage.getItem('token') && localStorage.getItem('user'),
   );
@@ -153,7 +147,6 @@ export function initMobileNav() {
     isOpen() ? close() : open();
   });
 
-  // klik poza menu
   document.addEventListener('click', (e) => {
     if (!isOpen()) return;
     const clickedInside =
@@ -161,18 +154,15 @@ export function initMobileNav() {
     if (!clickedInside) close();
   });
 
-  // klik w link w menu
   navMobile.addEventListener('click', (e) => {
     const link = e.target.closest('a.mobile-link');
     if (link) close();
   });
 
-  // ESC zamyka
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && isOpen()) close();
   });
 
-  // jeśli zmienisz rozmiar na md+, zamknij mobile menu
   window.addEventListener('resize', () => {
     if (window.matchMedia('(min-width: 768px)').matches) close();
   });
