@@ -1,5 +1,8 @@
-import { toggleNavByAuth, initLogout } from './authNav.js';
+import { toggleNavByAuth, initLogout, initMobileNav } from './authNav.js';
 import { getListings } from './api.js';
+import { fetchProfile } from '../profile/index.js';
+
+fetchProfile();
 
 const listEl = document.getElementById('auction-list');
 const searchInput = document.getElementById('search-input');
@@ -9,6 +12,8 @@ let allListings = [];
 document.addEventListener('DOMContentLoaded', () => {
   toggleNavByAuth();
   initLogout();
+  //initMobileNav();
+
   main();
 });
 

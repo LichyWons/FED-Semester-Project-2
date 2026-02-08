@@ -1,6 +1,7 @@
 import {
   toggleNavByAuth,
   initLogout,
+  initMobileNav,
   updateUserInStorage,
 } from '../js/authNav.js';
 import { createListing } from '../js/api.js';
@@ -40,6 +41,7 @@ function clearMessages() {
 document.addEventListener('DOMContentLoaded', () => {
   toggleNavByAuth();
   initLogout();
+  initMobileNav();
   if (!requireAuth()) return;
 });
 

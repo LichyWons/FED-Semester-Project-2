@@ -1,6 +1,7 @@
 import {
   toggleNavByAuth,
   initLogout,
+  initMobileNav,
   renderNavUser,
   updateUserInStorage,
 } from '../js/authNav.js';
@@ -56,7 +57,7 @@ const avatarSuccessEl = document.querySelector('#avatar-success');
 const myListingsEl = document.querySelector('#myListings');
 const myListingsStatusEl = document.querySelector('#myListingsStatus');
 
-async function fetchProfile() {
+export async function fetchProfile() {
   const profileName = getProfileName();
   const url = `${API_BASE}/auction/profiles/${encodeURIComponent(
     profileName,
@@ -193,6 +194,7 @@ function isValidUrl(value) {
 async function init() {
   toggleNavByAuth();
   initLogout();
+  initMobileNav();
 
   if (!requireAuth()) return;
 

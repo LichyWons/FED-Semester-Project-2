@@ -1,5 +1,5 @@
 import { getListingById } from '../js/api.js';
-import { toggleNavByAuth, initLogout } from '../js/authNav.js';
+import { toggleNavByAuth, initLogout, initMobileNav } from '../js/authNav.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   toggleNavByAuth();
